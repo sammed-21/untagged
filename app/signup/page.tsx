@@ -24,7 +24,7 @@ const SignUp = () => {
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
   const [visiblePassword, setVisiblePassword] = useState(false);
-
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
   const [passwordType, setPasswordType] = useState<visiblePassProp>("password");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -49,24 +49,36 @@ const SignUp = () => {
     setPasswordType((prev) => (prev === "password" ? "text" : "password"));
     setVisiblePassword((prev) => !prev);
   };
+  React.useEffect(() => {
+    if (
+      name.firstname.length > 0 &&
+      name.lastname.length > 0 &&
+      name.email.length > 0 &&
+      name.password.length > 0
+    ) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [name]);
   return (
     <main className="relative flex w-full justify-between overflow-x-hidden min-h-screen">
       {/* <div className="sticky flex gap-4 justify-center flex-col pt-8 py-10 px-10 "> */}
-      <div className="sticky flex flex-col gap-6 xl:w-2/3 md:w-1/2 z-10 bg-white py-8 max-md:sticky max-md:px-4 ">
+      <div className="sticky flex flex-col  xl:w-2/3 md:w-1/2 z-10 bg-white py-6 max-md:sticky max-md:px-4 ">
         <a href="" className="sm:px-5">
           <Image
             src={logo}
-            width={180}
-            height={30}
+            width={220}
+            height={60}
             alt="logo"
-            className="py-4 px-1"
+            className="py-3 px-5 font-bold"
           />
         </a>
 
         <div className="flex w-flex-col justify-center items-center">
           <div className="w-full justify-center items-center flex">
             <div className="w-[370px]">
-              <h1 className="text-5xl font-normal font-serif text-left">
+              <h1 className="text-5xl font-semibold font-sans text-left">
                 Sign up
               </h1>
               <p className="py-5">
@@ -105,7 +117,7 @@ const SignUp = () => {
                       label="first name"
                       value={name.firstname}
                       name="firstname"
-                      classname="w-44"
+                      classname="w-44 py-3 "
                       error={error}
                       onChange={handleInputChange}
                       placeholder=""
@@ -114,7 +126,7 @@ const SignUp = () => {
                       type="text"
                       label="last name"
                       value={name.lastname}
-                      classname="w-44"
+                      classname="w-44 py-3"
                       name="lastname"
                       error={error}
                       onChange={handleInputChange}
@@ -126,20 +138,19 @@ const SignUp = () => {
                     label="Email"
                     value={name.email}
                     name="email"
-                    classname="w-full"
+                    classname="w-full py-3"
                     error={error}
                     onChange={handleInputChange}
-                    placeholder="Email"
                   />
 
-                  <a href="#" className="relative">
+                  <span className="relative">
                     <span onClick={() => handleVisiblePassword()}>
                       {visiblePassword ? (
                         <Image
                           src={sighinpasswordvis}
                           width={20}
                           height={20}
-                          className="absolute top-[65px] right-3"
+                          className="absolute top-[69px] right-3"
                           alt="image"
                         />
                       ) : (
@@ -147,7 +158,7 @@ const SignUp = () => {
                           src={password}
                           width={20}
                           height={20}
-                          className="absolute top-[65px] right-3"
+                          className="absolute top-[69px] right-3"
                           alt="image"
                         />
                       )}
@@ -158,30 +169,33 @@ const SignUp = () => {
                       label="password"
                       value={name.password}
                       name="password"
-                      classname="w-full"
+                      classname="w-full py-3"
                       error={error}
                       onChange={handleInputChange}
-                      placeholder="password"
                     />
-                  </a>
-                  <div className="py-3">
+                  </span>
+                  <div className="mt-9">
                     <APPButton
                       types="submit"
-                      text="Signnp"
+                      disabled={buttonDisabled}
+                      aria-label="submit signup-form form"
+                      text="Sign up"
                       loading={loader}
-                      classname="w-full border-gray-300 font-semibold"
+                      classname="w-full    border-gray-300 font-semibold"
                     />
                   </div>
                 </section>
               </form>
-              <div className="text-sm">
-                <p className="text-gray-400">
+              <div className="text-sm ">
+                <p className="text-[#666666] font-normal py-6">
                   By clicking “Sign up” or “Sign up with Google,” you’re
-                  agreeing to Untapped’s{" "}
+                  agreeing to Untapped’s
                   <span className="underline">Terms of Use.</span>
                 </p>
-                <br />
-                <p>
+
+                <hr />
+
+                <p className="mt-5">
                   Already have an Untapped account?{" "}
                   <Link
                     className="font-semibold text-[0.875rem] text-[#3365e6] "

@@ -12,6 +12,8 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   text: string;
   classname?: string;
   loading: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
   disabled?: boolean;
 }
 
@@ -21,13 +23,18 @@ const APPButton = ({
   types,
   classname,
   disabled,
+  onClick,
 }: ButtonProps) => {
   return (
     <button
       type={types}
       disabled
+      onClick={onClick}
       className={twMerge(
-        `flex {${disabled} ? text-gray-500: text-black } gap-2 justify-center items-center w-full border-[1px] border-black rounded-sm py-1`,
+        `flex gap-2 h-[40px] text-sm justify-center items-center w-full rounded-sm py-1`,
+        disabled
+          ? "text-gray-300 bg-gray-100"
+          : "text-black hover:-translate-y-[2px] hover:ease-linear hover:shadow-md hover:bg-[#daf99] bg-[#c9f270]  ",
         classname
       )}
     >
@@ -39,39 +46,3 @@ const APPButton = ({
   );
 };
 export default APPButton;
-
-// import loader from "@/assets/loder.svg";
-// import Image from "next/image";
-// import React from "react";
-// import { twMerge } from "tailwind-merge";
-
-// // function cn(...inputs: ClassValue[]) {
-
-// // }
-// interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-//   types: "button" | "submit" | "reset";
-//   //   onSubmit: () => void;
-//   text: string;
-//   classname?: string;
-//   loading: boolean;
-// }
-
-// const APPButton = ({ text, loading, types, classname }: ButtonProps) => {
-//   return (
-//     <button
-//       type={types}
-//       className={twMerge(
-//         "flex gap-2 justify-center items-center w-full border-[1px] border-black rounded-sm py-1",
-//         classname
-//       )}
-//     >
-//       {/* {loading && ( * /\
-//       \
-//       p[;'./12qA  1 dfghbnm\-]
-//       <Image src={loader} alt="iamge" className="animate-spin" />
-//       {/* )} */}
-//       {text}
-//     </button>
-//   );
-// };
-// export default APPButton;

@@ -22,6 +22,7 @@ const SignIn = () => {
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
   const [visiblePassword, setVisiblePassword] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
 
   const [passwordType, setPasswordType] = useState<visiblePassProp>("password");
 
@@ -37,11 +38,13 @@ const SignIn = () => {
     e.preventDefault();
     const isAnyEmpty = Object.values(name).some((value) => value === "");
     setLoader(true);
+
     if (isAnyEmpty) {
       setError(true);
     } else {
       setError(false);
     }
+    console.log(name);
   };
   //   function handlePasswordfunction() {
   //     let visiblePasswords: string = visiblePassword ? "text" : "password";
@@ -54,6 +57,13 @@ const SignIn = () => {
     setPasswordType((prev) => (prev === "password" ? "text" : "password"));
     setVisiblePassword((prev) => !prev);
   };
+  React.useEffect(() => {
+    if (name.email.length > 0 && name.password.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [name]);
   return (
     <main className="relative flex w-full justify-between overflow-x-hidden min-h-screen">
       {/* <div className="sticky flex flex-col gap-6 w-1/4 z-10 bg-white py-8 max-md:sticky max-md:px-8 "> */}
@@ -146,7 +156,7 @@ const SignIn = () => {
                     <APPButton
                       types="submit"
                       text="Log in"
-                      disabled
+                      disabled={buttonDisabled}
                       classname="w-full border-gray-300 font-semibold"
                       loading={false}
                     />
