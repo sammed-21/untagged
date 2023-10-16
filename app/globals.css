@@ -15,3 +15,7 @@ body {
    margin: 0;
    box-sizing: border-box;
 }
+
+ .custom-checkbox:checked {
+  border-color: #CBD5E0; /* Set your desired gray-300 color code here */
+}

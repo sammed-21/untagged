@@ -27,7 +27,7 @@ const dropdownOptions: DropdownOption[] = [
   { label: "Director", value: "director" },
   { label: "Executive Leader", value: "executiveleader" },
 ];
-const WorkExperience: React.FC = ({}) => {
+const EducationPage: React.FC = ({}) => {
   const [selectedItem, setSelectedItem] = useState<string>(""); // State to manage selected item in sidebar
   const [isChecked, setIsChecked] = useState(false); // State for checkbox
   const [endDate, setIsEndDate] = useState(false); // State for checkbox
@@ -332,5 +332,5 @@ const WorkExperience: React.FC = ({}) => {
   );
 };
 
-export default WorkExperience;
+export default EducationPage;
 // postcss.config.js
