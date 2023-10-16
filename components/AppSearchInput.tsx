@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 interface AppSearchInputProps {
-  label: string;
+  label?: string;
   value: string;
   classname?: string;
   items: string[];
+  placeholder?: string;
   onSelect: (selectedItem: string) => void;
 }
 
@@ -13,6 +14,7 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
   label,
   items,
   value,
+  placeholder,
   classname,
   onSelect,
 }) => {
@@ -48,20 +50,20 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
       <input
         type="text"
         className={twMerge(
-          " p-2 w-full border rounded  border-gray-300 focus:ring focus:ring-blue-200 focus:border-black",
+          " p-2 w-full border  rounded  border-gray-300  border:transition focus:border-black",
           classname
         )}
         // className="mt-1 p-2 w-full border rounded  border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-500"
         value={searchTerm}
         onChange={handleInputChange}
-        placeholder={`Search ${label.toLowerCase()}`}
+        placeholder={placeholder}
       />
       {filteredItems.length > 0 && (
         <ul className="mt-2 z-20 border rounded border-gray-300 bg-white shadow-lg absolute w-full">
           {filteredItems.map((item) => (
             <li
               key={item}
-              className="cursor-pointer hover:bg-blue-200 p-2"
+              className="cursor-pointer hover:bg-black p-2"
               onClick={() => handleItemSelect(item)}
             >
               {item}

@@ -110,7 +110,7 @@ const WorkExperience: React.FC = ({}) => {
   }, [name]);
 
   return (
-    <div className="relative w-fullcontainer border">
+    <div className="relative w-fullcontainer border-none">
       <div className=" flex flex-col my-5    items-center w-full justify-center max-md:px-5">
         <h1 className="text-4xl  font-serif    font-normal">
           Recent work experience
@@ -139,8 +139,12 @@ const WorkExperience: React.FC = ({}) => {
               </span>
             </div>
             <div
-              className={` flex w-full max-md:flex-col max-md:items-center justify-center gap-7 mb-14`}
+              className={`flex gap-7 w-full ${
+                isChecked ? "justify-center" : ""
+              }`}
             >
+              {" "}
+              {/* <div className={` flex w-full    justify-center gap-7 mb-14`}> */}
               {isChecked ? (
                 <div className="border-[1px] border-gray-100">
                   <p className="font-semibold p-3  text-xs">
@@ -150,8 +154,13 @@ const WorkExperience: React.FC = ({}) => {
                   </p>
                 </div>
               ) : (
+                // <div className="max-w-[400px] border-[1px] border-gray-100 p-3 text-sm">
+                //   You've found the right place. Hundreds of Untapped's partners
+                //   use the platform specifically to hire for early career roles.
+                // </div>
                 <>
                   {" "}
+                  {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5"> */}{" "}
                   <div className="w-[400px] flex flex-col gap-[22.5px] max-md:w-full max-md:px-5">
                     <span className="relative">
                       <span
@@ -169,8 +178,9 @@ const WorkExperience: React.FC = ({}) => {
                       </span>
                       <AppSearchInput
                         label="Current / Most Recent Employer"
+                        placeholder="Company"
                         value={selectedItem}
-                        classname="w-full h-[46px]"
+                        classname="min-w-full h-[46px]"
                         items={dummyItems}
                         onSelect={handleSelectSearch}
                       />
@@ -211,7 +221,6 @@ const WorkExperience: React.FC = ({}) => {
                         onChange={handleDropdownChange}
                       />
                     </span>
-
                     <AppInput
                       type="text"
                       label="Start date"
@@ -223,6 +232,7 @@ const WorkExperience: React.FC = ({}) => {
                       placeholder="MM/YYYY"
                     />
                   </div>
+                  {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5"> */}
                   <div className="w-[400px] max-md:w-full flex flex-col gap-[22.5px]  max-md:px-5">
                     <AppInput
                       type="text"
@@ -252,6 +262,7 @@ const WorkExperience: React.FC = ({}) => {
                         label="Job Type"
                         value={selectedItem}
                         classname="w-full h-[46px]"
+                        placeholder="Search Job type (i.e Sales)"
                         items={dummyItems}
                         onSelect={handleSelectSearch}
                       />
@@ -293,13 +304,13 @@ const WorkExperience: React.FC = ({}) => {
                         label=""
                         onChange={handleCehcboxEndDate}
                       />
-                      <span className="">I'm looking for my first job</span>
+                      <span className="">I currently work here</span>
                     </span>
                   </div>{" "}
                 </>
               )}
             </div>
-            <div className="flex w-full items-center justify-center mb-11">
+            <div className="flex w-full items-center justify-center mt-3 mb-11">
               <span className="relative">
                 <span
                   className="absolute right-3"

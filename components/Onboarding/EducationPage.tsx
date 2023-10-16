@@ -1,3 +1,4 @@
+"use client";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import AppInput from "../AppInput";
 import APPButton from "../AppButton";
@@ -9,6 +10,8 @@ import DropdownInput from "../AppDropDown";
 import { DropdownOption } from "@/components/AppDropDown";
 import DateInput from "../AppData";
 import AppSearchInput from "../AppSearchInput";
+import Textarea from "../AppTextarea";
+import PreviousMap from "postcss/lib/previous-map";
 
 export const dummyItems: string[] = [
   "Item 1",
@@ -44,6 +47,14 @@ const EducationPage: React.FC = ({}) => {
 
   // Handler to change the selected item in the sidebar
 
+  const [error, setError] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [visiblePassword, setVisiblePassword] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+  const [majors, setMajors] = useState<string[]>([]);
+  const [minors, setMinors] = useState<string[]>([]);
+  //this is option for the dropdown inputfield
+  const [selectedOption, setSelectedOption] = useState<string | number>("");
   const [name, setName] = useState({
     company: "",
     joblevel: "",
@@ -52,13 +63,14 @@ const EducationPage: React.FC = ({}) => {
     jobtype: "",
     enddate: "",
   });
-  const [error, setError] = useState(false);
-  const [loader, setLoader] = useState(false);
-  const [visiblePassword, setVisiblePassword] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+  const [educationSelfTaught, setEducationSelfTaught] = useState({
+    school: "",
+    textarea: "",
+  });
 
-  //this is option for the dropdown inputfield
-  const [selectedOption, setSelectedOption] = useState<string | number>("");
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = e.target.value;
+  };
 
   const handleDropdownChange = (selectedValue: string | number) => {
     console.log(selectedValue);
@@ -71,7 +83,14 @@ const EducationPage: React.FC = ({}) => {
     setSelectedItem(selectedItem);
     console.log(`Selected item: ${selectedItem}`);
   };
+  //handle major button
+  const handleMajor = () => {
+    setMajors([...majors, ""]); // Add an empty major field
+  };
 
+  const handleMinor = () => {
+    setMinors([...minors, ""]); // Add an empty minor field
+  };
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setName((prev) => ({
@@ -110,15 +129,9 @@ const EducationPage: React.FC = ({}) => {
   }, [name]);
 
   return (
-    <div className="relative w-fullcontainer border">
-      <div className=" flex flex-col my-5    items-center w-full justify-center max-md:px-5">
-        <h1 className="text-4xl  font-serif    font-normal">
-          Recent work experience
-        </h1>
-
-        <p className="text-gray-900 mt-[1rem]">
-          You can add additional work experience to your profile later
-        </p>
+    <div className="relative min-w-full container ">
+      <div className=" flex flex-col my-5    items-center min-w-full justify-center max-md:px-5">
+        <h1 className="text-4xl  font-serif    font-normal">Education</h1>
       </div>
 
       <div className="flex w-full justify-center items-center px-5 ">
@@ -130,29 +143,72 @@ const EducationPage: React.FC = ({}) => {
                 error={false}
                 name="checkbox"
                 value={""}
-                classname=" w-6 h-6 border-[1px] border-gray-300 text-blue-500"
+                classname="text-xs w-6 h-6 border-[1px] border-gray-300 text-blue-500"
                 label=""
                 onChange={handleCheckboxChange}
               />
-              <span className="mt-6 h-6 mb-4">
-                I'm looking for my first job
-              </span>
+              <span className="mt-6 h-6 mb-4">I'm self-taught</span>
             </div>
             <div
-              className={` flex w-full max-md:flex-col max-md:items-center justify-center gap-7 mb-14`}
+              className={` flex w-full min-w-full max-md:flex-col max-md:items-center  gap-7 mb-2`}
             >
+              {/* {isChecked ? (
+                <div className="border-[1px] w-full  min-w-full border-gray-100">
+                  <span className="relative">
+                    <span
+                      className="absolute right-3"
+                      style={{
+                        top: `calc(60% - 0px)`, // 10px is half of the image height (20px / 2)
+                      }}
+                    >
+                      <Image src={Search} width={18} height={18} alt="image" />
+                    </span>
+                    <AppSearchInput
+                      label="Self Taught Decpline"
+                      value={selectedItem}
+                      classname="w-full min-w-full"
+                      placeholder="School/Traning"
+                      items={dummyItems}
+                      onSelect={handleSelectSearch}
+                    />
+                  </span>
+                  <Textarea
+                    label="Description"
+                    placeholder="Enter your description..."
+                    value={educationSelfTaught.textarea}
+                    onChange={handleChange}
+                  />
+                </div> */}
               {isChecked ? (
-                <div className="border-[1px] border-gray-100">
-                  <p className="font-semibold p-3  text-xs">
-                    You've found the right place. Hundreds of Untapped's
-                    partners use the platform specifically to hire for early
-                    career roles.
-                  </p>
+                <div className="flex min-w-full flex-col gap-4">
+                  <span className="relative">
+                    <span
+                      className="absolute right-3"
+                      style={{ top: `calc(60% - 0px)` }}
+                    >
+                      <Image src={Search} width={18} height={18} alt="image" />
+                    </span>
+                    <AppSearchInput
+                      label="Self Taught Discipline"
+                      value={selectedItem}
+                      classname=" w-full h-[44px]"
+                      placeholder="School/Training"
+                      items={dummyItems}
+                      onSelect={handleSelectSearch}
+                    />
+                  </span>
+                  <Textarea
+                    label="Description"
+                    placeholder="Enter your description..."
+                    value={educationSelfTaught.textarea}
+                    onChange={handleChange}
+                    classname="w-full h-[252px] "
+                  />
                 </div>
               ) : (
-                <>
+                <div className="flex flex-col min-w-full   gap-[22.5px]">
                   {" "}
-                  <div className="w-[400px] flex flex-col gap-[22.5px] max-md:w-full max-md:px-5">
+                  <div>
                     <span className="relative">
                       <span
                         className="absolute right-3"
@@ -168,106 +224,41 @@ const EducationPage: React.FC = ({}) => {
                         />
                       </span>
                       <AppSearchInput
-                        label="Current / Most Recent Employer"
+                        label="School/Traning
+                        "
                         value={selectedItem}
+                        placeholder="School/traning"
                         classname="w-full h-[46px]"
                         items={dummyItems}
                         onSelect={handleSelectSearch}
                       />
-                      {/* <AppInput
+                    </span>
+                  </div>
+                  <div className="flex justify-between gap-[22.5px] ">
+                    <div className="w-[400px] max-md:w-full flex flex-col gap-[22.5px]  max-md:px-5">
+                      {/* <div className="w-[400px] flex flex-col gap-[22.5px] max-md:w-full max-md:px-5"> */}
+                      <AppInput
                         type="text"
-                        label="Job Level"
-                        value={name.company}
-                        name="company"
+                        label="Start date"
+                        value={name.startdate}
+                        name="startdate"
                         classname="w-full h-[46px]"
                         error={error}
                         onChange={handleInputChange}
-                        placeholder="Company"
-                      /> */}
-                    </span>
-                    <span className="relative">
-                      {/* <span
-                    className="absolute right-3"
-                    style={{
-                      top: `calc(70% - 00px)`, // 10px is half of the image height (20px / 2)
-                    }}
-                    >
-                    <Image
-                    src={downarrow}
-                    className="text-gray-200"
-                    width={14}
-                    height={14}
-                    alt="image"
-                    />
-                  </span> */}
+                        placeholder="MM/YYYY"
+                      />
                       <DropdownInput
                         label="Experience Level"
                         options={dropdownOptions}
                         value={selectedOption}
                         name="experienceLevel"
-                        classname="w-full h-[46px]"
+                        classname="w-full h-[46px] placeholder:font-gray-300"
                         placeholder="Select experience level"
                         error={false} // Set this to true to show error message
                         onChange={handleDropdownChange}
                       />
-                    </span>
-
-                    <AppInput
-                      type="text"
-                      label="Start date"
-                      value={name.startdate}
-                      name="startdate"
-                      classname="w-full h-[46px]"
-                      error={error}
-                      onChange={handleInputChange}
-                      placeholder="MM/YYYY"
-                    />
-                  </div>
-                  <div className="w-[400px] max-md:w-full flex flex-col gap-[22.5px]  max-md:px-5">
-                    <AppInput
-                      type="text"
-                      label="Job Title"
-                      value={name.jobtitle}
-                      name="jobtitle"
-                      classname="w-full h-[46px]"
-                      error={error}
-                      onChange={handleInputChange}
-                      placeholder="Job title"
-                    />
-                    <span className="relative">
-                      <span
-                        className="absolute right-3"
-                        style={{
-                          top: `calc(60% - 0px)`, // 10px is half of the image height (20px / 2)
-                        }}
-                      >
-                        <Image
-                          src={Search}
-                          width={18}
-                          height={18}
-                          alt="image"
-                        />
-                      </span>
-                      <AppSearchInput
-                        label="Job Type"
-                        value={selectedItem}
-                        classname="w-full h-[46px]"
-                        items={dummyItems}
-                        onSelect={handleSelectSearch}
-                      />
-
-                      {/* <AppInput
-                        type="text"
-                        label="Job Type"
-                        value={name.jobtype}
-                        name="jobtype"
-                        classname="w-full  h-[46px]"
-                        error={error}
-                        onChange={handleInputChange}
-                        placeholder="Search Job type (i.e. Sales)"
-                      /> */}
-                    </span>
-                    {!endDate && (
+                    </div>
+                    <div className="w-[400px] max-md:w-full flex flex-col gap-[22.5px]  max-md:px-5">
                       <DateInput
                         type="text" // 'text' type ensures the input behaves as a text field (no date picker)
                         label="End date"
@@ -278,27 +269,83 @@ const EducationPage: React.FC = ({}) => {
                         onChange={handleInputChange}
                         placeholder="MM/YYYY"
                       />
-                    )}
-                    <span
-                      className={`${
-                        endDate ? "mt-9" : ""
-                      } flex justify-start items-center gap-3`}
-                    >
-                      <AppInput
-                        type="checkbox"
-                        error={false}
-                        name="checkbox"
-                        value={""}
-                        classname={` w-6 h-6  border-[1px] text-sm bg-gray-100 checked:border-gray-300 text-blue-500`}
-                        label=""
-                        onChange={handleCehcboxEndDate}
-                      />
-                      <span className="">I'm looking for my first job</span>
-                    </span>
-                  </div>{" "}
-                </>
+                      <span className="relative">
+                        <span
+                          className="absolute right-3"
+                          style={{
+                            top: `calc(60% - 0px)`, // 10px is half of the image height (20px / 2)
+                          }}
+                        >
+                          <Image
+                            src={Search}
+                            width={18}
+                            height={18}
+                            alt="image"
+                          />
+                        </span>
+                        <AppSearchInput
+                          label="Major"
+                          value={selectedItem}
+                          placeholder="Major"
+                          classname="w-full h-[46px]"
+                          items={dummyItems}
+                          onSelect={handleSelectSearch}
+                        />
+                      </span>
+                      {majors.map((_) => (
+                        <span className="relative">
+                          <span
+                            className="absolute right-3"
+                            style={{
+                              top: `calc(60% - 0px)`, // 10px is half of the image height (20px / 2)
+                            }}
+                          >
+                            <Image
+                              src={Search}
+                              width={18}
+                              height={18}
+                              alt="image"
+                            />
+                          </span>
+                          <AppSearchInput
+                            label="Additional Major"
+                            value={selectedItem}
+                            placeholder="Add Major..."
+                            classname="w-full h-[46px]"
+                            items={dummyItems}
+                            onSelect={handleSelectSearch}
+                          />
+                        </span>
+                      ))}
+                      <div className="flex justify-end items-center gap-4">
+                        <button
+                          onClick={handleMajor}
+                          type="button"
+                          className="text-blue-600 text-sm font-semibold"
+                        >
+                          Add a major
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleMinor}
+                          className="text-blue-600 text-sm font-semibold"
+                        >
+                          Add a minor
+                        </button>
+                      </div>{" "}
+                    </div>{" "}
+                  </div>
+                </div>
               )}
             </div>
+            {!isChecked && (
+              <button
+                type="button"
+                className="text-sm flex  gap-3 text-blue-500 mb-2 border-[1px] border-blue-600 py-3 px-3 rounded-full"
+              >
+                +<p className=" font-semibold"> Add Another School</p>
+              </button>
+            )}
             <div className="flex w-full items-center justify-center mb-11">
               <span className="relative">
                 <span

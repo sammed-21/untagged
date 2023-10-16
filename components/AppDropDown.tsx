@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import React, { useState } from "react";
 import Image from "next/image"; // Assuming you are using Next.js for the Image component
 import requiredImg from "@/assets/svgexport-5.svg"; // Path to your required image
+import { color } from "framer-motion";
 
 export interface DropdownOption {
   label?: string;
@@ -50,7 +51,8 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
       </label>
       <select
         className={twMerge(
-          "text-base font-normal py-2 px-4 w-60 border border-gray-300 rounded focus:outline-none focus:border-black focus:border-2",
+          " text-base font-normal py-2 px-4 w-60 border  border-gray-300 rounded focus:outline-none focus:border-black focus:border-2 transition ease-in",
+          // "text-base font-normal py-2 w-60 border border-gray-300 rounded focus:outline-none focus:border-black focus:border-2",
           classname
         )}
         id={label}
@@ -59,7 +61,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
         onChange={handleOptionChange}
         disabled={disabled}
       >
-        <option value="" disabled hidden>
+        <option value="" className="text-gray-300" disabled hidden>
           {placeholder}
         </option>
         {options.map((option) => (
