@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 const inter = Inter({ subsets: ["latin"] });
 import logo from "@/assets/brand-logo-combined.svg";
+import { OnboardingProvider } from "@/context/OnboardingContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +23,7 @@ export default function RootLayout({
           <div className="absolute left-[2.56rem] z-10 top-[3rem] ">
             <Image src={logo} width={200} height={75} alt="logo" className="" />
           </div>
-          {children}
+          <OnboardingProvider>{children}</OnboardingProvider>
         </div>
       </body>
     </html>

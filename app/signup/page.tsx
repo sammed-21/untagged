@@ -5,6 +5,22 @@ import sighupBanner from "@/assets/signupbanner.png";
 import password from "@/assets/password-invisible.svg";
 import GoogleSSO from "@/assets/GoogleSSO.png";
 import logo from "@/assets/brand-logo-combined.svg";
+
+import * as Yup from "yup";
+import { withFormik, FormikProps, FormikErrors, Form, Field } from "formik";
+
+interface FormValues {
+  firstname: string;
+  lastname: string;
+
+  email: string;
+  password: string;
+}
+
+interface OtherProps {
+  message: string;
+}
+
 import Link from "next/link";
 import sighinpasswordvis from "@/assets/password-visible.svg";
 import loder from "@/assets/loder.svg";
@@ -13,6 +29,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import AppInput from "@/components/AppInput";
 import Button from "@/components/AppButton";
 import APPButton from "@/components/AppButton";
+import { FaLess } from "react-icons/fa";
+import PasswordInput from "@/components/AppPasswordInput";
 type visiblePassProp = "password" | "text" | string;
 const SignUp = () => {
   const [name, setName] = useState({
@@ -24,7 +42,7 @@ const SignUp = () => {
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
   const [visiblePassword, setVisiblePassword] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [passwordType, setPasswordType] = useState<visiblePassProp>("password");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -37,6 +55,7 @@ const SignUp = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(name);
     const isAnyEmpty = Object.values(name).some((value) => value === "");
     setLoader(true);
     if (isAnyEmpty) {
@@ -44,6 +63,7 @@ const SignUp = () => {
     } else {
       setError(false);
     }
+    setLoader(false);
   };
   const handleVisiblePassword = () => {
     setPasswordType((prev) => (prev === "password" ? "text" : "password"));
@@ -110,7 +130,7 @@ const SignUp = () => {
                 <hr className="flex-grow border-t-2 ml-3" />
               </span>
               <form onSubmit={handleSubmit}>
-                <section className="flex flex-col">
+                <section className="flex flex-col space-y-10">
                   <div className=" relative w-full  flex justify-between items-center">
                     <AppInput
                       type="text"
@@ -118,8 +138,11 @@ const SignUp = () => {
                       value={name.firstname}
                       name="firstname"
                       classname="w-44 py-3 "
-                      error={error}
+                      pattern="^[A-Za-z0-9]{3,60}$"
+                      errors={error}
+                      errorMessage="first name is required"
                       onChange={handleInputChange}
+                      required={true}
                       placeholder=""
                     />
                     <AppInput
@@ -128,18 +151,22 @@ const SignUp = () => {
                       value={name.lastname}
                       classname="w-44 py-3"
                       name="lastname"
-                      error={error}
+                      required={true}
+                      errorMessage="last is required"
+                      pattern="^[A-Za-z0-9]{3,60}$"
                       onChange={handleInputChange}
                       placeholder=""
                     />
                   </div>
                   <AppInput
-                    type="text"
+                    type="email"
                     label="Email"
+                    errorMessage="email is required"
                     value={name.email}
                     name="email"
+                    pattern={`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`}
                     classname="w-full py-3"
-                    error={error}
+                    required={true}
                     onChange={handleInputChange}
                   />
 
@@ -150,7 +177,7 @@ const SignUp = () => {
                           src={sighinpasswordvis}
                           width={20}
                           height={20}
-                          className="absolute top-[69px] right-3"
+                          className="absolute z-10 pt-10  right-3"
                           alt="image"
                         />
                       ) : (
@@ -158,23 +185,27 @@ const SignUp = () => {
                           src={password}
                           width={20}
                           height={20}
-                          className="absolute top-[69px] right-3"
+                          className="absolute z-10 pt-10 right-3"
                           alt="image"
                         />
                       )}
                     </span>
-
-                    <AppInput
-                      type={passwordType}
-                      label="password"
-                      value={name.password}
-                      name="password"
-                      classname="w-full py-3"
-                      error={error}
-                      onChange={handleInputChange}
-                    />
+                    <span className="relative">
+                      <PasswordInput
+                        type={passwordType}
+                        label="password"
+                        value={name.password}
+                        name="password"
+                        errorMessage="password is required"
+                        classname="w-full py-3 "
+                        // pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                        pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+                        required={true}
+                        onChange={handleInputChange}
+                      />
+                    </span>
                   </span>
-                  <div className="mt-9">
+                  <div className="relative">
                     <APPButton
                       types="submit"
                       disabled={buttonDisabled}

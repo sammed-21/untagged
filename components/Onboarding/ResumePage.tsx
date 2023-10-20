@@ -109,22 +109,24 @@ const WorkExperience: React.FC = ({}) => {
       setButtonDisabled(true);
     }
   }, [name]);
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = (file: File | null) => {
     // Handle the selected file here
     console.log("Selected file:", file);
   };
   return (
-    <div className="relative w-fullcontainer border-none">
+    <div className="relative w-full p-[18.5px] container border-none">
       <div className=" flex flex-col my-5    items-center w-full justify-center max-md:px-5">
-        <h1 className="text-4xl  font-serif    font-normal">Resume</h1>
+        <h1 className="text-[32px]  font-sans font-semibold leading-[125%]">
+          Resume
+        </h1>
       </div>
 
       <div className="flex w-full justify-center items-center px-5 ">
         <form onSubmit={handleSubmit} className="w-full flex ">
-          <section className=" flex flex-col justify-center items-start  w-full p-15">
+          <section className=" flex flex-col gap-5 justify-center items-start  w-full p-15">
             {/* <div className={` flex w-full    justify-center gap-7 mb-14`}> */}
 
-            <div className="border-[1px]  min-w-full border-gray-100">
+            <div className="border-[1px] flex flex-col gap-[20px] min-w-full border-gray-100">
               <AppInput
                 type="url"
                 label="Add your Linkdin URL"
@@ -132,14 +134,14 @@ const WorkExperience: React.FC = ({}) => {
                 pattern="https://.*"
                 name="startdate"
                 classname="w-full h-[46px]"
-                error={error}
+                errors={error}
                 onChange={handleInputChange}
                 placeholder="https://www.linkdin.com/in/yourprofile"
               />
 
               <AppCustomFileInput
                 label="Resume (opt)"
-                classname="mt-5"
+                classname=""
                 onFileSelect={handleFileSelect}
                 // type="file"
                 // label="Add your Linkdin URL"
@@ -151,7 +153,9 @@ const WorkExperience: React.FC = ({}) => {
                 // placeholder="Drag and drop your resume or browse"
               />
             </div>
-
+            <div className="border-[1px] text-color- border-gray-100 text-center text-xs font-semibold py-3 min-w-full">
+              Updating your resume is half the battle!
+            </div>
             <div className="flex w-full items-center justify-center mt-3 mb-11">
               <span className="relative">
                 <span
@@ -171,6 +175,7 @@ const WorkExperience: React.FC = ({}) => {
                 <APPButton
                   types="button"
                   // disabled={buttonDisabled}
+
                   aria-label="submit signup-form form"
                   text="Save & continue"
                   loading={loader}

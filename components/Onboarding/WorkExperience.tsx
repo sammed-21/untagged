@@ -6,7 +6,7 @@ import Search from "@/assets/Search.svg";
 import forwardarrow from "@/assets/forwardarrow.svg";
 import Image from "next/image";
 import DropdownInput from "../AppDropDown";
-import { DropdownOption } from "@/components/AppDropDown";
+import CustomDropdown, { DropdownOption } from "@/components/AppDropDown";
 import DateInput from "../AppData";
 import AppSearchInput from "../AppSearchInput";
 
@@ -61,7 +61,6 @@ const WorkExperience: React.FC = ({}) => {
   const [selectedOption, setSelectedOption] = useState<string | number>("");
 
   const handleDropdownChange = (selectedValue: string | number) => {
-    console.log(selectedValue);
     setSelectedOption(selectedValue);
     // Do something with the selected value, if needed
   };
@@ -73,11 +72,22 @@ const WorkExperience: React.FC = ({}) => {
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setName((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (e.target) {
+      const { name, value } = e.target;
+
+      // Ensure name and value are defined before updating the state
+      if (name !== undefined && value !== undefined) {
+        console.log(name);
+        setName((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      } else {
+        console.error("Name or value is undefined in the event target.");
+      }
+    } else {
+      console.error("Event target is undefined.");
+    }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -89,11 +99,16 @@ const WorkExperience: React.FC = ({}) => {
     } else {
       setError(false);
     }
+    // handleNextSection();
   };
-  const HanldeCheckbox = (e: FormEvent<HTMLFormElement>) => {
-    console.log(e.target);
-  };
+  const [startDate, setStartDate] = useState({
+    startdate: "",
+    enddate: "",
+  });
 
+  // const handleStartDateChange = (formattedDate: string) => {
+  //   setStartDate(formattedDate);
+  // };
   React.useEffect(() => {
     if (
       name.company.length > 0 &&
@@ -110,9 +125,9 @@ const WorkExperience: React.FC = ({}) => {
   }, [name]);
 
   return (
-    <div className="relative w-fullcontainer border-none">
+    <div className="relative w-full container p-[18.5px] border-none">
       <div className=" flex flex-col my-5    items-center w-full justify-center max-md:px-5">
-        <h1 className="text-4xl  font-serif    font-normal">
+        <h1 className="text-[32px]  font-sans font-semibold leading-[125%]">
           Recent work experience
         </h1>
 
@@ -127,10 +142,10 @@ const WorkExperience: React.FC = ({}) => {
             <div className="flex gap-4 my-5 relative justify-start items-center h-auto  w-full">
               <AppInput
                 type="checkbox"
-                error={false}
+                errors={error}
                 name="checkbox"
                 value={""}
-                classname=" w-6 h-6 border-[1px] border-gray-300 text-blue-500"
+                classname=" w-6 h-6  border-[1px] border-gray-300 text-blue-500"
                 label=""
                 onChange={handleCheckboxChange}
               />
@@ -139,7 +154,7 @@ const WorkExperience: React.FC = ({}) => {
               </span>
             </div>
             <div
-              className={`flex gap-7 w-full ${
+              className={`flex gap-[24px] w-full ${
                 isChecked ? "justify-center" : ""
               }`}
             >
@@ -161,7 +176,7 @@ const WorkExperience: React.FC = ({}) => {
                 <>
                   {" "}
                   {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5"> */}{" "}
-                  <div className="w-[400px] flex flex-col gap-[22.5px] max-md:w-full max-md:px-5">
+                  <div className="w-[400px] flex flex-col gap-[25px] max-md:w-full max-md:px-5">
                     <span className="relative">
                       <span
                         className="absolute right-3"
@@ -180,7 +195,8 @@ const WorkExperience: React.FC = ({}) => {
                         label="Current / Most Recent Employer"
                         placeholder="Company"
                         value={selectedItem}
-                        classname="min-w-full h-[46px]"
+                        error={error}
+                        classname="min-w-full pl-4  h-[46px]"
                         items={dummyItems}
                         onSelect={handleSelectSearch}
                       />
@@ -210,26 +226,26 @@ const WorkExperience: React.FC = ({}) => {
                     alt="image"
                     />
                   </span> */}
-                      <DropdownInput
+                      <CustomDropdown
                         label="Experience Level"
                         options={dropdownOptions}
                         value={selectedOption}
                         name="experienceLevel"
-                        classname="w-full h-[46px]"
+                        classname="w-full mb-7 capitalize h-[46px]"
                         placeholder="Select experience level"
                         error={false} // Set this to true to show error message
                         onChange={handleDropdownChange}
                       />
                     </span>
-                    <AppInput
+                    <DateInput
+                      label="Start Date"
                       type="text"
-                      label="Start date"
                       value={name.startdate}
-                      name="startdate"
-                      classname="w-full h-[46px]"
-                      error={error}
+                      classname="min-w-full h-[46px]"
+                      error={false}
                       onChange={handleInputChange}
                       placeholder="MM/YYYY"
+                      name="startdate"
                     />
                   </div>
                   {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5"> */}
@@ -240,7 +256,7 @@ const WorkExperience: React.FC = ({}) => {
                       value={name.jobtitle}
                       name="jobtitle"
                       classname="w-full h-[46px]"
-                      error={error}
+                      errors={error}
                       onChange={handleInputChange}
                       placeholder="Job title"
                     />
@@ -261,7 +277,7 @@ const WorkExperience: React.FC = ({}) => {
                       <AppSearchInput
                         label="Job Type"
                         value={selectedItem}
-                        classname="w-full h-[46px]"
+                        classname="w-full pl-4 h-[46px]"
                         placeholder="Search Job type (i.e Sales)"
                         items={dummyItems}
                         onSelect={handleSelectSearch}
@@ -280,15 +296,25 @@ const WorkExperience: React.FC = ({}) => {
                     </span>
                     {!endDate && (
                       <DateInput
-                        type="text" // 'text' type ensures the input behaves as a text field (no date picker)
-                        label="End date"
+                        label="End Date"
+                        type="text"
                         value={name.enddate}
-                        name="enddate"
-                        classname="w-full h-[46px]"
-                        error={error}
+                        classname="min-w-full mt- h-[46px]"
+                        error={false}
                         onChange={handleInputChange}
                         placeholder="MM/YYYY"
+                        name="enddate"
                       />
+                      // <DateInput
+                      //   type="text"
+                      //   label="End date"
+                      //   value={name.enddate}
+                      //   name="endDate"
+                      //   classname="min-w-full h-[46px]"
+                      //   error={false} // Set to true if there's an error with the input
+                      //   onChange={handleInputChange} // Pass the parent's onChange handler
+                      //   placeholder="MM/YYYY"
+                      // />
                     )}
                     <span
                       className={`${
@@ -297,7 +323,7 @@ const WorkExperience: React.FC = ({}) => {
                     >
                       <AppInput
                         type="checkbox"
-                        error={false}
+                        errors={false}
                         name="checkbox"
                         value={""}
                         classname={` w-6 h-6  border-[1px] text-sm bg-gray-100 checked:border-gray-300 text-blue-500`}
@@ -327,7 +353,8 @@ const WorkExperience: React.FC = ({}) => {
                 </span>
 
                 <APPButton
-                  types="button"
+                  types="submit"
+                  forward
                   // disabled={buttonDisabled}
                   aria-label="submit signup-form form"
                   text="Save & continue"

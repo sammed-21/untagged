@@ -19,3 +19,18 @@ body {
  .custom-checkbox:checked {
   border-color: #CBD5E0; /* Set your desired gray-300 color code here */
 }
+   .dropdown-container select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    background: url('../assets/downarrow.svg') no-repeat right center;
+}
+
+
+input:invalid[data-focused='true'] ~ span{
+  display: flex; 
+}
+input:invalid[data-focused='true'] {
+  border: 2px solid red;
+}

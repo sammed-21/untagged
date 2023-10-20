@@ -1,8 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import Image from "next/image";
+import requiredImg from "@/assets/svgexport-5.svg";
 interface AppSearchInputProps {
   label?: string;
+  error?: string | boolean;
   value: string;
   classname?: string;
   items: string[];
@@ -14,6 +17,8 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
   label,
   items,
   value,
+  error,
+
   placeholder,
   classname,
   onSelect,
@@ -63,13 +68,25 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
           {filteredItems.map((item) => (
             <li
               key={item}
-              className="cursor-pointer hover:bg-black p-2"
+              className="cursor-pointer hover:bg-gray-200 p-2"
               onClick={() => handleItemSelect(item)}
             >
               {item}
             </li>
           ))}
         </ul>
+      )}
+      {error && (
+        <p className="text-sm flex gap-2 flex-start item-center justify-start text-red-500 mt-1">
+          <Image
+            src={requiredImg}
+            width={10}
+            height={1}
+            className="w-5 bg-red-800 rounded-full"
+            alt="requried"
+          />
+          <span>{label} is required</span>
+        </p>
       )}
     </div>
   );

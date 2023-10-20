@@ -129,9 +129,11 @@ const EducationPage: React.FC = ({}) => {
   }, [name]);
 
   return (
-    <div className="relative min-w-full container ">
+    <div className="relative min-w-full p-[18.5px] container ">
       <div className=" flex flex-col my-5    items-center min-w-full justify-center max-md:px-5">
-        <h1 className="text-4xl  font-serif    font-normal">Education</h1>
+        <h1 className="text-[32px]  font-sans font-semibold leading-[125%]">
+          Education
+        </h1>
       </div>
 
       <div className="flex w-full justify-center items-center px-5 ">
@@ -140,7 +142,7 @@ const EducationPage: React.FC = ({}) => {
             <div className="flex gap-4 my-5 relative justify-start items-center h-auto  w-full">
               <AppInput
                 type="checkbox"
-                error={false}
+                errors={false}
                 name="checkbox"
                 value={""}
                 classname="text-xs w-6 h-6 border-[1px] border-gray-300 text-blue-500"
@@ -191,7 +193,7 @@ const EducationPage: React.FC = ({}) => {
                     <AppSearchInput
                       label="Self Taught Discipline"
                       value={selectedItem}
-                      classname=" w-full h-[44px]"
+                      classname="pl-4 w-full h-[44px]"
                       placeholder="School/Training"
                       items={dummyItems}
                       onSelect={handleSelectSearch}
@@ -228,7 +230,7 @@ const EducationPage: React.FC = ({}) => {
                         "
                         value={selectedItem}
                         placeholder="School/traning"
-                        classname="w-full h-[46px]"
+                        classname="w-full pl-4 h-[46px]"
                         items={dummyItems}
                         onSelect={handleSelectSearch}
                       />
@@ -237,22 +239,22 @@ const EducationPage: React.FC = ({}) => {
                   <div className="flex justify-between gap-[22.5px] ">
                     <div className="w-[400px] max-md:w-full flex flex-col gap-[22.5px]  max-md:px-5">
                       {/* <div className="w-[400px] flex flex-col gap-[22.5px] max-md:w-full max-md:px-5"> */}
-                      <AppInput
+                      <DateInput
+                        label="Start Date"
                         type="text"
-                        label="Start date"
                         value={name.startdate}
-                        name="startdate"
-                        classname="w-full h-[46px]"
-                        error={error}
+                        classname="min-w-full h-[46px]"
+                        error={false}
                         onChange={handleInputChange}
                         placeholder="MM/YYYY"
+                        name="startdate"
                       />
                       <DropdownInput
                         label="Experience Level"
                         options={dropdownOptions}
                         value={selectedOption}
                         name="experienceLevel"
-                        classname="w-full h-[46px] placeholder:font-gray-300"
+                        classname="w-full capitalize h-[46px] placeholder:font-gray-300"
                         placeholder="Select experience level"
                         error={false} // Set this to true to show error message
                         onChange={handleDropdownChange}
@@ -287,13 +289,13 @@ const EducationPage: React.FC = ({}) => {
                           label="Major"
                           value={selectedItem}
                           placeholder="Major"
-                          classname="w-full h-[46px]"
+                          classname="w-full pl-4 h-[46px]"
                           items={dummyItems}
                           onSelect={handleSelectSearch}
                         />
                       </span>
-                      {majors.map((_) => (
-                        <span className="relative">
+                      {majors.map((_, index) => (
+                        <span key={index} className="relative">
                           <span
                             className="absolute right-3"
                             style={{
