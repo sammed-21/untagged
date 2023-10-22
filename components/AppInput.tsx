@@ -40,8 +40,7 @@ const AppInput: FC<InputProps> = ({
   };
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
-
-    onChange(e);
+    if (onChange) onChange(e);
   };
 
   return (

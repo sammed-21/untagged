@@ -1,3 +1,4 @@
+"use client";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import AppInput from "../AppInput";
 import APPButton from "../AppButton";
@@ -9,6 +10,7 @@ import DropdownInput from "../AppDropDown";
 import CustomDropdown, { DropdownOption } from "@/components/AppDropDown";
 import DateInput from "../AppData";
 import AppSearchInput from "../AppSearchInput";
+// import { useOnboardingContext } from "@/context/OnboardingContext"; // Provide the correct path to your OnboardingProvider file
 
 export const dummyItems: string[] = [
   "Item 1",
@@ -28,6 +30,16 @@ const dropdownOptions: DropdownOption[] = [
   { label: "Executive Leader", value: "executiveleader" },
 ];
 const WorkExperience: React.FC = ({}) => {
+  // const {
+  //   selectedSection,
+  //   setSelectedSection,
+  //   transitionDirection,
+  //   setTransitionDirection,
+  //   handleBackSection,
+  //   handleNextSection,
+  //   componentsMap,
+  // } = useOnboardingContext();
+
   const [selectedItem, setSelectedItem] = useState<string>(""); // State to manage selected item in sidebar
   const [isChecked, setIsChecked] = useState(false); // State for checkbox
   const [endDate, setIsEndDate] = useState(false); // State for checkbox
@@ -94,6 +106,7 @@ const WorkExperience: React.FC = ({}) => {
     e.preventDefault();
     const isAnyEmpty = Object.values(name).some((value) => value === "");
     setLoader(true);
+
     if (isAnyEmpty) {
       setError(true);
     } else {
@@ -125,9 +138,9 @@ const WorkExperience: React.FC = ({}) => {
   }, [name]);
 
   return (
-    <div className="relative w-full container p-[18.5px] border-none">
+    <div className="relative w-full container items-center justify-center flex flex-col p-[18.5px] border-none">
       <div className=" flex flex-col my-5    items-center w-full justify-center max-md:px-5">
-        <h1 className="text-[32px]  font-sans font-semibold leading-[125%]">
+        <h1 className="text-[2rem] font-sans font-semibold tracking-wide leading-8">
           Recent work experience
         </h1>
 
@@ -154,7 +167,7 @@ const WorkExperience: React.FC = ({}) => {
               </span>
             </div>
             <div
-              className={`flex gap-[24px] w-full ${
+              className={`flex max-sm:flex-col  gap-[24px] w-full ${
                 isChecked ? "justify-center" : ""
               }`}
             >
@@ -175,8 +188,8 @@ const WorkExperience: React.FC = ({}) => {
                 // </div>
                 <>
                   {" "}
-                  {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5"> */}{" "}
-                  <div className="w-[400px] flex flex-col gap-[25px] max-md:w-full max-md:px-5">
+                  {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5">{" "} */}
+                  <div className="w-[400px] flex flex-col gap-[24px] max-md:w-full max-md:px-5">
                     <span className="relative">
                       <span
                         className="absolute right-3"
@@ -200,16 +213,6 @@ const WorkExperience: React.FC = ({}) => {
                         items={dummyItems}
                         onSelect={handleSelectSearch}
                       />
-                      {/* <AppInput
-                        type="text"
-                        label="Job Level"
-                        value={name.company}
-                        name="company"
-                        classname="w-full h-[46px]"
-                        error={error}
-                        onChange={handleInputChange}
-                        placeholder="Company"
-                      /> */}
                     </span>
                     <span className="relative">
                       {/* <span
@@ -241,7 +244,7 @@ const WorkExperience: React.FC = ({}) => {
                       label="Start Date"
                       type="text"
                       value={name.startdate}
-                      classname="min-w-full h-[46px]"
+                      classname="w-full h-[46px]"
                       error={false}
                       onChange={handleInputChange}
                       placeholder="MM/YYYY"
@@ -249,7 +252,7 @@ const WorkExperience: React.FC = ({}) => {
                     />
                   </div>
                   {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5"> */}
-                  <div className="w-[400px] max-md:w-full flex flex-col gap-[22.5px]  max-md:px-5">
+                  <div className="w-[400px] max-md:w-full flex flex-col gap-[26px]  max-md:px-5">
                     <AppInput
                       type="text"
                       label="Job Title"
@@ -299,7 +302,7 @@ const WorkExperience: React.FC = ({}) => {
                         label="End Date"
                         type="text"
                         value={name.enddate}
-                        classname="min-w-full mt- h-[46px]"
+                        classname="w-full mt- h-[46px]"
                         error={false}
                         onChange={handleInputChange}
                         placeholder="MM/YYYY"
@@ -356,6 +359,7 @@ const WorkExperience: React.FC = ({}) => {
                   types="submit"
                   forward
                   // disabled={buttonDisabled}
+
                   aria-label="submit signup-form form"
                   text="Save & continue"
                   loading={loader}

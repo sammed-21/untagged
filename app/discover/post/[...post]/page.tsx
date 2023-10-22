@@ -50,15 +50,18 @@ const postId = ({ params }: { params: { post: number } }) => {
   };
   return (
     <div className="flex h-screen gap-12 overflow-y-auto ">
-      <div className="flex flex-1 relative flex-shrink-1 basis-[66%] w-full max-xl:basis-full max-xl:flex-shrink max-xl:w-full   min-h-screen justify-start items-start flex-col">
-        <div className="sticky min-w-[66%] bg-white mt-0 top-0 left-0 h-[4rem] z-50 flex items-center cursor-pointer py-5 px-8">
+      <div className="flex flex-1 relative grow flex-shrink-1 basis-[80%] max-xl:basis-full max-xl:flex-shrink max-xl:w-full   min-h-screen justify-start items-start flex-col">
+        <Link
+          href={"/discover/post"}
+          className="sticky top-0  bg-white mt-0 w-full left-0 h-[4rem] z-50 flex items-center cursor-pointer py-5 px-8"
+        >
           {/* <div className="h-16 space-x-3 shadow-md bg-white flex justify-start pl-16 items-center fixed z-50 top-0 "> */}
           <IoChevronBackOutline />
           back
-        </div>
+        </Link>
         {/* this is heading back */}
-        <div className="rounded-none my-0  pt-3 min-h-screen">
-          <div className="max-w-3xl flex gap-3 bg-white my-0 mx-auto rounded-2xl px-6 py-8 overflow-hidden relative">
+        <div className="rounded-none min-w-max  w-full min-h-screen ">
+          <div className="max-w-4xl min-h-full flex gap-3  px-6 py-8 overflow-hidden relative">
             {/* <div className="flex  relative pt-20 px-[80px] h-y-auto   bg-white  gap-5"> */}
             <div className="w-[2.56rem] h-[2.56rem] rounded-full justify-center items-center bg-green-100 ">
               <span className="p-2 font-semibold text-[#25b2aa] flex items-center justify-center">
@@ -148,7 +151,7 @@ const postId = ({ params }: { params: { post: number } }) => {
         </div>
       </div>
       {/* right side trending div */}
-      <div className="min-w-[207px] mr-12 flex flex-col justify-center items-center p-3 h-[60px] bg-white">
+      <div className="max-w-sm grow flex-shrink basis-2/6 py-9 px-11 ">
         Tending
       </div>
     </div>

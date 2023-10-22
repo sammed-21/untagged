@@ -159,7 +159,7 @@ const AuthorizationPage: React.FC = ({}) => {
     <div className="relative min-w-full p-[18.5px] container ">
       {" "}
       <div className=" flex flex-col my-5    items-center min-w-full justify-center max-md:px-5">
-        <h1 className="text-[32px]  font-sans font-semibold leading-[125%]">
+        <h1 className="text-[2rem] font-sans font-semibold tracking-wide leading-8">
           Work authorization
         </h1>
       </div>

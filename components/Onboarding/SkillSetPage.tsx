@@ -27,10 +27,21 @@ const options = [
   { label: "Marketing", value: 8 },
   { label: "Mobile", value: 9 },
 ];
+const option2 = [
+  { label: "HTML", value: 1 },
+  { label: "Css", value: 2 },
+  { label: "React.js", value: 3 },
+  { label: "Excel", value: 4 },
+  { label: "Next.js", value: 5 },
+  { label: "Typescript", value: 6 },
+  { label: "Javascript ", value: 7 },
+  { label: "Backend", value: 8 },
+  { label: "Frontend", value: 9 },
+];
 
 const SkillSetPage: React.FC = () => {
   const [value1, setValue1] = useState<SelectOption[]>([options[0]]);
-  const [value2, setValue2] = useState<SelectOption[]>([options[0]]);
+  const [value2, setValue2] = useState<SelectOption[]>([option2[0]]);
   const [loader, setLoader] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -42,7 +53,7 @@ const SkillSetPage: React.FC = () => {
   return (
     <div className="relative w-full p-[18.5px] container border-none">
       <div className="flex flex-col my-5 items-center w-full justify-center max-md:px-5">
-        <h1 className="text-[32px]  font-sans font-semibold leading-[125%]">
+        <h1 className="text-[2rem] font-sans font-semibold tracking-wide leading-8">
           Skill set
         </h1>
         <p className="text-gray-900 text-center mt-[1rem]">
@@ -114,7 +125,7 @@ const SkillSetPage: React.FC = () => {
                 </span>
                 <Select
                   multiple
-                  options={options}
+                  options={option2}
                   classname="min-w-full pl-10"
                   value={value2}
                   onChange={(o) => setValue2(o)}

@@ -6,9 +6,9 @@ import requiredImg from "@/assets/svgexport-5.svg";
 interface AppSearchInputProps {
   label?: string;
   error?: string | boolean;
-  value: string;
+  value?: string;
   classname?: string;
-  items: string[];
+  items?: string[];
   placeholder?: string;
   onSelect: (selectedItem: string) => void;
 }
@@ -29,10 +29,10 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchTerm(value);
-    const filtered = items.filter((item) =>
+    const filtered = items?.filter((item) =>
       item.toLowerCase().includes(value.toLowerCase())
     );
-    setFilteredItems(filtered);
+    setFilteredItems(filtered!);
     if (value.length == 0) {
       setFilteredItems([]);
     }

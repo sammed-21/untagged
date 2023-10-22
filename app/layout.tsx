@@ -20,10 +20,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="relative">
-          <div className="absolute left-[2.56rem] z-10 top-[3rem] ">
+          {/* <div className="absolute left-[2.56rem] z-10 top-[3rem] ">
             <Image src={logo} width={200} height={75} alt="logo" className="" />
-          </div>
-          <OnboardingProvider>{children}</OnboardingProvider>
+          </div> */}
+          {/* <OnboardingProvider> */}
+          {children}
+          {/* </OnboardingProvider> */}
         </div>
       </body>
     </html>

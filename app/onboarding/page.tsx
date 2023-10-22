@@ -8,6 +8,7 @@ import SkillSetPage from "@/components/Onboarding/SkillSetPage";
 import ResumePage from "@/components/Onboarding/ResumePage";
 import AuthorizationPage from "@/components/Onboarding/AuthorizationPage";
 import EducationPage from "@/components/Onboarding/EducationPage";
+import logo from "@/assets/brand-logo-combined.svg";
 
 interface Props {
   children: ReactNode;
@@ -68,7 +69,10 @@ const OnboardingPage: React.FC<Props> = ({ children }: Props) => {
 
   const [transitionDirection, setTransitionDirection] = useState(1);
   return (
-    <div className="w-full bg-gray-100 min-h-screen relative flex justify-center space-x-[32px] items-center">
+    <div className="w-full bg-gray-100 min-h-screen relative flex justify-center gap-[31px] items-center">
+      <div className="absolute left-[2.79rem] z-10 top-[2.76rem] ">
+        <Image src={logo} width={185} height={75} alt="logo" className="" />
+      </div>
       <section className="flex w-full max-xl:mx-1 border-none  min-h-fit justify-center gap-6 my-[44px]  z-10">
         <div className="container lg:w-[1000px] max-lg:min-w-full shadow-md max-xl:items-center bg-white rounded-lg p-2">
           <div className="flex space-x-6 gap-5 w-full flex-wrap items-center text-xs justify-center py-8">

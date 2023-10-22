@@ -115,7 +115,7 @@ const SignIn = () => {
                     value={name.email}
                     name="email"
                     classname="w-full"
-                    error={error}
+                    errors={error}
                     onChange={handleInputChange}
                     placeholder="Email"
                   />
@@ -146,7 +146,7 @@ const SignIn = () => {
                       value={name.password}
                       name="password"
                       classname="w-full"
-                      error={error}
+                      errors={error}
                       onChange={handleInputChange}
                       placeholder="password"
                     />
