@@ -1,3 +1,5 @@
+import DoorDash from '@/assets/DoorDash.png'
+import matteljob from '@/assets/matteljob.png'
 export const postdata = [
   {
     id: 1,
@@ -61,3 +63,47 @@ export const postdata = [
   },
 ];
 
+
+export const jobcardContent = [
+  {
+    title: "2024 Machine Learning Engineer Summer Intern",
+    
+    company: "Guidewire Software",
+    location: "New York, NY",
+    salary:'$44k - $50k',
+    jobType: "Full-time",
+    applicants: 150,
+    imageSrc: 'https://jumpstart-static.s3.amazonaws.com/backend/organizations/organization/Cgq_EG-vSIWFHaV4QGHmhA.JPG',
+  },
+  {
+    title: "2024 Summer Undergraduate Corporate Reporting Intern Mattel",
+    company: "Mattel",
+    location: "El Segundo, CA",
+    jobType: "Internship",
+    applicants: 120,
+    imageSrc: 'https://jumpstart-static.s3.amazonaws.com/backend/organizations/organization/jVhyYaOyTQeaYdLFMk2DUQ.png'
+  },
+  {
+    title: "Swicth Architect Engineer Intern",
+    company: "Marvell Technology",
+    location: "Santa Clara, CA",
+    jobType: "Internship",
+    applicants: 120,
+    imageSrc: 'https://jumpstart-static.s3.amazonaws.com/backend/organizations/organization/G-6wOeI0ScutjIi8xU4PjQ.jpg',
+  },
+  {
+    title: "Data Analyst",
+    company: "Live Nation Entertainment",
+    location: "New York",
+    jobType: "Full Time",
+    applicants: 120,
+    imageSrc: DoorDash
+  },
+  {
+    title: "Engineering Intern | Summer 2024 (2025 Grad Year)",
+    company: "Twitch",
+    location: "San Francisco, CA, Seattle , WA",
+    jobType: "Full Time",
+    applicants: 120,
+    imageSrc: 'https://jumpstart-static.s3.amazonaws.com/backend/organizations/organization/Q8jtHy4BRui2HJmLkf3iVQ.png'
+  }]

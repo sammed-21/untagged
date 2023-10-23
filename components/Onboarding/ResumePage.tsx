@@ -114,7 +114,7 @@ const WorkExperience: React.FC = ({}) => {
     console.log("Selected file:", file);
   };
   return (
-    <div className="relative w-full p-[18.5px] container border-none">
+    <div className="relative min-w-full p-[18.5px] container border-none">
       <div className=" flex flex-col my-5    items-center w-full justify-center max-md:px-5">
         <h1 className="text-[2rem] font-sans font-semibold tracking-wide leading-8">
           Resume

@@ -10,6 +10,7 @@ import DropdownInput from "../AppDropDown";
 import CustomDropdown, { DropdownOption } from "@/components/AppDropDown";
 import DateInput from "../AppData";
 import AppSearchInput from "../AppSearchInput";
+import { useGlobalState } from "@/context/globalstateContainer";
 // import { useOnboardingContext } from "@/context/OnboardingContext"; // Provide the correct path to your OnboardingProvider file
 
 export const dummyItems: string[] = [
@@ -30,6 +31,11 @@ const dropdownOptions: DropdownOption[] = [
   { label: "Executive Leader", value: "executiveleader" },
 ];
 const WorkExperience: React.FC = ({}) => {
+  const { state, dispatch } = useGlobalState();
+  const { index } = state;
+  const setIndex = (newIndex: string) => {
+    dispatch({ type: "SET_INDEX", payload: newIndex });
+  };
   // const {
   //   selectedSection,
   //   setSelectedSection,
@@ -122,6 +128,7 @@ const WorkExperience: React.FC = ({}) => {
   // const handleStartDateChange = (formattedDate: string) => {
   //   setStartDate(formattedDate);
   // };
+
   React.useEffect(() => {
     if (
       name.company.length > 0 &&
@@ -138,7 +145,7 @@ const WorkExperience: React.FC = ({}) => {
   }, [name]);
 
   return (
-    <div className="relative w-full container items-center justify-center flex flex-col p-[18.5px] border-none">
+    <div className="relative w-full  items-center justify-center flex flex-col lg:p-[18.5px]  border-none">
       <div className=" flex flex-col my-5    items-center w-full justify-center max-md:px-5">
         <h1 className="text-[2rem] font-sans font-semibold tracking-wide leading-8">
           Recent work experience
@@ -149,15 +156,16 @@ const WorkExperience: React.FC = ({}) => {
         </p>
       </div>
 
-      <div className="flex w-full justify-center items-center px-5 ">
+      <div className="flex w-full justify-center items-center  ">
         <form onSubmit={handleSubmit} className="w-full flex ">
-          <section className=" flex flex-col justify-center items-start  w-full p-15">
+          <section className=" flex flex-col justify-center items-start  w-full p-15 max-md:p-0">
             <div className="flex gap-4 my-5 relative justify-start items-center h-auto  w-full">
               <AppInput
                 type="checkbox"
                 errors={error}
                 name="checkbox"
                 value={""}
+                required={false}
                 classname=" w-6 h-6  border-[1px] border-gray-300 text-blue-500"
                 label=""
                 onChange={handleCheckboxChange}
@@ -167,7 +175,7 @@ const WorkExperience: React.FC = ({}) => {
               </span>
             </div>
             <div
-              className={`flex max-sm:flex-col  gap-[24px] w-full ${
+              className={`flex   gap-[24px] w-full ${
                 isChecked ? "justify-center" : ""
               }`}
             >
@@ -189,46 +197,19 @@ const WorkExperience: React.FC = ({}) => {
                 <>
                   {" "}
                   {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5">{" "} */}
-                  <div className="w-[400px] flex flex-col gap-[24px] max-md:w-full max-md:px-5">
-                    <span className="relative">
-                      <span
-                        className="absolute right-3"
-                        style={{
-                          top: `calc(60% - 0px)`, // 10px is half of the image height (20px / 2)
-                        }}
-                      >
-                        <Image
-                          src={Search}
-                          width={18}
-                          height={18}
-                          alt="image"
-                        />
-                      </span>
-                      <AppSearchInput
-                        label="Current / Most Recent Employer"
-                        placeholder="Company"
-                        value={selectedItem}
-                        error={error}
-                        classname="min-w-full pl-4  h-[46px]"
-                        items={dummyItems}
-                        onSelect={handleSelectSearch}
-                      />
-                    </span>
-                    <span className="relative">
-                      {/* <span
-                    className="absolute right-3"
-                    style={{
-                      top: `calc(70% - 00px)`, // 10px is half of the image height (20px / 2)
-                    }}
-                    >
-                    <Image
-                    src={downarrow}
-                    className="text-gray-200"
-                    width={14}
-                    height={14}
-                    alt="image"
+                  <div className="w-[400px] flex flex-col gap-[24px] max-md:w-full ">
+                    {/* <span className="relative"> */}
+                    <AppSearchInput
+                      label="Current / Most Recent Employer"
+                      placeholder="Company"
+                      value={selectedItem}
+                      error={error}
+                      classname="min-w-full pl-4  h-[46px]"
+                      items={dummyItems}
+                      onSelect={handleSelectSearch}
                     />
-                  </span> */}
+                    {/* </span> */}
+                    <span className="relative">
                       <CustomDropdown
                         label="Experience Level"
                         options={dropdownOptions}
@@ -252,7 +233,7 @@ const WorkExperience: React.FC = ({}) => {
                     />
                   </div>
                   {/* <div className="w-full max-w-[400px] flex flex-col gap-4 max-md:w-full max-md:px-5"> */}
-                  <div className="w-[400px] max-md:w-full flex flex-col gap-[26px]  max-md:px-5">
+                  <div className="w-[400px] max-md:w-full flex flex-col gap-[26px]  ">
                     <AppInput
                       type="text"
                       label="Job Title"
@@ -263,30 +244,16 @@ const WorkExperience: React.FC = ({}) => {
                       onChange={handleInputChange}
                       placeholder="Job title"
                     />
-                    <span className="relative">
-                      <span
-                        className="absolute right-3"
-                        style={{
-                          top: `calc(60% - 0px)`, // 10px is half of the image height (20px / 2)
-                        }}
-                      >
-                        <Image
-                          src={Search}
-                          width={18}
-                          height={18}
-                          alt="image"
-                        />
-                      </span>
-                      <AppSearchInput
-                        label="Job Type"
-                        value={selectedItem}
-                        classname="w-full pl-4 h-[46px]"
-                        placeholder="Search Job type (i.e Sales)"
-                        items={dummyItems}
-                        onSelect={handleSelectSearch}
-                      />
 
-                      {/* <AppInput
+                    <AppSearchInput
+                      label="Job Type"
+                      value={selectedItem}
+                      classname="w-full pl-4 h-[46px]"
+                      placeholder="Search Job type (i.e Sales)"
+                      items={dummyItems}
+                      onSelect={handleSelectSearch}
+                    />
+                    {/* <AppInput
                         type="text"
                         label="Job Type"
                         value={name.jobtype}
@@ -296,7 +263,6 @@ const WorkExperience: React.FC = ({}) => {
                         onChange={handleInputChange}
                         placeholder="Search Job type (i.e. Sales)"
                       /> */}
-                    </span>
                     {!endDate && (
                       <DateInput
                         label="End Date"
@@ -340,7 +306,7 @@ const WorkExperience: React.FC = ({}) => {
               )}
             </div>
             <div className="flex w-full items-center justify-center mt-3 mb-11">
-              <span className="relative">
+              <span onClick={() => setIndex("education")} className=" relative">
                 <span
                   className="absolute right-3"
                   style={{

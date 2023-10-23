@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 import requiredImg from "@/assets/svgexport-5.svg";
-import Search from "@/assets/Search.svg";
+import Search from "@/assets/graysearch.svg";
 interface AppSearchInputProps {
   label?: string;
   error?: string | boolean;
@@ -58,7 +58,7 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
         <input
           type="text"
           className={twMerge(
-            " p-2 w-full border  rounded  border-gray-300  border:transition focus:border-black",
+            "placeholder:pl-5 placeholder:items-center  p-2 w-full border  rounded  border-gray-300  border:transition focus:border-black",
             classname
           )}
           // className="mt-1 p-2 w-full border rounded  border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-500"
@@ -66,7 +66,12 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
           onChange={handleInputChange}
           placeholder={placeholder}
         />
-        <div className="absolute right-3 top-4">
+        <div
+          className="absolute left-4"
+          style={{
+            top: `calc(50% - 10px)`, // 10px is half of the image height (20px / 2)
+          }}
+        >
           <Image src={Search} width={18} height={18} alt="image" />
         </div>
       </div>

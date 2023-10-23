@@ -9,6 +9,7 @@ import ResumePage from "@/components/Onboarding/ResumePage";
 import AuthorizationPage from "@/components/Onboarding/AuthorizationPage";
 import EducationPage from "@/components/Onboarding/EducationPage";
 import logo from "@/assets/brand-logo-combined.svg";
+import { useGlobalState } from "@/context/globalstateContainer"; // Adjust the import path
 
 interface Props {
   children: ReactNode;
@@ -31,11 +32,14 @@ const componentsMap: Record<
 };
 
 const OnboardingPage: React.FC<Props> = ({ children }: Props) => {
+  const { state, dispatch } = useGlobalState();
+  console.log(state);
   const [selectedSection, setSelectedSection] = useState("workexperience");
   const [backSelectedSection, setBackSelectedSection] = useState("");
   const currentIndex = componentsMap[selectedSection].index;
 
   const handleSectionChange = (section: string) => {
+    // dispatch({ type: "SET_INDEX", payload: selectedSection });
     setBackSelectedSection(section);
     const nextIndex = componentsMap[section].index;
     setSelectedSection(section);
@@ -97,10 +101,10 @@ const OnboardingPage: React.FC<Props> = ({ children }: Props) => {
           </div>
           <hr className="underline" />
 
-          <div className="flex border-none bg-white justify-center overflow-x-hidden -z-20 ">
+          <div className="flex w-full border-none bg-white justify-center overflow-x-hidden -z-20 ">
             {selectedSection in componentsMap && (
               <motion.div
-                className="min-w-full px-9"
+                className="w-full  px-9"
                 key={selectedSection}
                 initial={{ opacity: 0, x: `${100 * transitionDirection}%` }}
                 animate={{ opacity: 1, x: "0%" }}

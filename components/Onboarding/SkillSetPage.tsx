@@ -51,7 +51,7 @@ const SkillSetPage: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full p-[18.5px] container border-none">
+    <div className="relative w-full p-[18.5px] container border-none overflow-hidden ">
       <div className="flex flex-col my-5 items-center w-full justify-center max-md:px-5">
         <h1 className="text-[2rem] font-sans font-semibold tracking-wide leading-8">
           Skill set
@@ -67,7 +67,7 @@ const SkillSetPage: React.FC = () => {
           <section className="flex flex-col gap-4 justify-center items-start w-full p-15">
             {/* ... Other form elements */}
 
-            <div className="border-[1px] flex flex-col gap-2 border-gray-100">
+            <div className="border-[1px]  max-lg:min w-full flex flex-col gap-2 border-gray-100">
               <div className="relative flex flex-col mb-2 max-w-92">
                 <p className="font-semibold text-sm text-gray-700 mb-2 block">
                   Areas of expertise
@@ -77,7 +77,7 @@ const SkillSetPage: React.FC = () => {
                   4)
                 </p>
               </div>
-              <div className="relative w-[325px]">
+              <div className="relative w-full lg:w-[325px]">
                 <span
                   className="absolute z-50 left-3 bottom-6"
                   // style={{ bottom: `calc(35% - 10px)` }}
@@ -95,30 +95,15 @@ const SkillSetPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="border-[1px]  border-gray-100">
+            <div className="border-[1px] max-lg:min w-full border-gray-100 z-50">
               <div className="relative max-w-92 mb-2">
                 <p className="font-semibold text-sm text-gray-700 mb-2 block">
                   Top Skills
                 </p>
                 <p className="text-sm text-gray-500">Choose up to 10 skills</p>
               </div>
-              {/* <div className="relative w-[325px]">
-                <span
-                className="absolute z-10 left-3"
-                // style={{ top: `calc(65% - 20px)` }}
-                style={{ bottom: `calc(35% - 10%)` }}
-                >
-                <Image src={Search} width={18} height={18} alt="image" />
-                </span>
-                <Select
-                  multiple
-                  options={options}
-                  classname="min-w-full pl-10"
-                  value={value2}
-                  onChange={(o) => setValue2(o)}
-                  />
-                </div> */}
-              <div className="relative w-[325px]">
+
+              <div className="relative w-full lg:w-[325px] ">
                 {/* className="absolute z-50 left-3 bottom-6" */}
                 <span className="absolute z-10 left-3 bottom-6">
                   <Image src={Search} width={18} height={18} alt="image" />

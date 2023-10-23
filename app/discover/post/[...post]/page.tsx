@@ -49,11 +49,11 @@ const postId = ({ params }: { params: { post: number } }) => {
     console.log(e.target.value);
   };
   return (
-    <div className="flex h-screen gap-12 overflow-y-auto ">
-      <div className="flex flex-1 relative grow flex-shrink-1 basis-[80%] max-xl:basis-full max-xl:flex-shrink max-xl:w-full   min-h-screen justify-start items-start flex-col">
+    <div className="flex h-screen gap-12 overflow-y-auto w-full ">
+      <div className="flex flex-1  bg-white  relative grow flex-shrink-1 basis-[80%] max-xl:basis-full max-xl:flex-shrink max-xl:w-full   min-h-screen justify-start items-start flex-col">
         <Link
           href={"/discover/post"}
-          className="sticky top-0  bg-white mt-0 w-full left-0 h-[4rem] z-50 flex items-center cursor-pointer py-5 px-8"
+          className="sticky top-0 gap-3 text-[#666] bg-white shadow-md mt-0 w-full left-0 h-[4rem] z-50 flex items-center cursor-pointer py-5 px-8"
         >
           {/* <div className="h-16 space-x-3 shadow-md bg-white flex justify-start pl-16 items-center fixed z-50 top-0 "> */}
           <IoChevronBackOutline />
@@ -119,7 +119,7 @@ const postId = ({ params }: { params: { post: number } }) => {
             </div>
           </div>
           {/* comment tag */}
-          <div className="sticky bottom-0 w-full py-6 shadow-2xl rounded-e-lg bg-white px-8 z-10">
+          <div className="sticky bottom-0  w-full py-6 drop-shadow-2xl rounded-e-lg bg-white px-8 z-10">
             <div className=" mb-3 flex justify-between   ">
               <span className=" justify-center gap-2 items-center flex">
                 {" "}
@@ -143,7 +143,7 @@ const postId = ({ params }: { params: { post: number } }) => {
                 <input
                   type="text"
                   placeholder="Leave a comment"
-                  className="text-black border-none focus:border-none placeholder:text-gray-400 bg-transparent "
+                  className="text-black enabled:hover:border-none w-full  border-none focus:border-none placeholder:text-gray-400 bg-transparent "
                 />
               </div>
             </div>

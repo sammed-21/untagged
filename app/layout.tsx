@@ -5,6 +5,7 @@ import Image from "next/image";
 const inter = Inter({ subsets: ["latin"] });
 import logo from "@/assets/brand-logo-combined.svg";
 import { OnboardingProvider } from "@/context/OnboardingContext";
+import { GlobalStateProvider } from "@/context/globalstateContainer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,14 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="relative">
-          {/* <div className="absolute left-[2.56rem] z-10 top-[3rem] ">
+        <GlobalStateProvider>
+          <div className="relative">
+            {/* <div className="absolute left-[2.56rem] z-10 top-[3rem] ">
             <Image src={logo} width={200} height={75} alt="logo" className="" />
           </div> */}
-          {/* <OnboardingProvider> */}
-          {children}
-          {/* </OnboardingProvider> */}
-        </div>
+            {/* <OnboardingProvider> */}
+            {children}
+            {/* </OnboardingProvider> */}
+          </div>
+        </GlobalStateProvider>
       </body>
     </html>
   );
