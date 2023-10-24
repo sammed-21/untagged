@@ -48,12 +48,14 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
 
   return (
     <div className="">
-      <label
-        className="font-semibold text-sm  text-gray-700 mb-2 block"
-        htmlFor={label}
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          className="font-semibold text-sm  text-gray-700 mb-2 block"
+          htmlFor={label}
+        >
+          {label}
+        </label>
+      )}
       <div className="relative flex">
         <input
           type="text"

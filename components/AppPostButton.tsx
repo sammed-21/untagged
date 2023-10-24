@@ -5,15 +5,18 @@ interface AppPostButtonProps {
   icon: string;
   label: string;
   classname?: string;
+  onClick?: () => void;
 }
 
 const AppPostButton: React.FC<AppPostButtonProps> = ({
   classname,
   icon,
+  onClick,
   label,
 }) => {
   return (
     <button
+      onClick={onClick}
       className={twMerge(
         "flex items-center py-1  border-[1px] border-gray-400 w-fit  px-3 rounded-full",
         classname

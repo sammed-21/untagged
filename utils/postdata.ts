@@ -8,6 +8,7 @@ export const postdata = [
     university: "St. John's University",
     graduationYear: 2024,
     location: "New York City",
+    label:'remote work',
     content:
     "Seeking Software Engineering Internships Any Location Any Season Hey everyone,My name is Rakesh and I am currently seeking Internships for 2024. I currently reside in New York City, and enrolled in a Bachelor's Degree in Computer Science I have a genuine passion for Software Engineering, so much so that I am prepared to take an internship for ANY location (in the US) and ANY season in 2024. I plan to graduate in Spring of 2025 and I want nothing more than to get more hands on experience in the career path that I truly love. I am grateful to have the opportunity to have this much free time before my graduation and really hope to get as much experience as I can during the 2024 seasons!",
     date: "2 days ago",
