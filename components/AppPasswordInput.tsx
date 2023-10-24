@@ -2,7 +2,6 @@
 import { useState, ChangeEvent, HTMLInputTypeAttribute } from "react";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
-import requiredImg from "@/assets/svgexport-5.svg";
 
 interface PasswordInputProps {
   onChange: (value: string) => void;
